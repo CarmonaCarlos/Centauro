@@ -1,0 +1,39 @@
+﻿<Application
+    x:Class="Centauro.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Centauro"
+    RequestedTheme="Light"
+    xmlns:datavis="using:WinRTXamlToolkit.Controls.DataVisualization"   
+    xmlns:charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting" 
+    xmlns:Series="using:WinRTXamlToolkit.Controls.DataVisualization.Charting" >
+
+    <Application.Resources>
+        <Style TargetType="charting:AxisLabel" x:Key="VerticalAxisStyle">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="StringFormat" Value="{}{0}"/>
+            <Setter
+                Property="RenderTransformOrigin"
+                Value="0.3, 0.9"/>
+
+            <!--THESE LINES ARE IMPORTANT-->
+            <Setter
+                Property="RenderTransform">
+                <Setter.Value>
+                    <RotateTransform Angle="90"/>
+                    <!--THESE LINES ARE IMPORTANT-->
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="charting:AxisLabel">
+                        <TextBlock Text="{TemplateBinding FormattedContent}">
+                        </TextBlock>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+
+</Application>
+

@@ -1,0 +1,108 @@
+﻿<Page
+    x:Class="Centauro.TemperaturaDeshidratadora"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Centauro"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:datavis="using:WinRTXamlToolkit.Controls.DataVisualization"   
+    xmlns:charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting" 
+    xmlns:Series="using:WinRTXamlToolkit.Controls.DataVisualization.Charting" 
+    xmlns:chartingprimitives="using:WinRTXamlToolkit.Controls.DataVisualization.Charting.Primitives"
+    >
+
+    <Page.Resources>
+        <ControlTemplate x:Key="ColumnChartControlTemplate" TargetType="charting:Chart">
+            <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Padding="{TemplateBinding Padding}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition
+                                    Height="Auto" />
+                        <RowDefinition
+                                    Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <datavis:Title
+                                Content="{TemplateBinding Title}"
+                                Style="{TemplateBinding TitleStyle}" />
+
+                    <!-- Use a nested Grid to avoid possible clipping behavior resulting from ColumnSpan+Width=Auto -->
+                    <Grid
+                                Grid.Row="1"
+                                Margin="0,15,0,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                        Width="*" />
+                            <ColumnDefinition
+                                        Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition
+                                        Height="Auto" />
+                            <RowDefinition
+                                        Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <datavis:Legend
+                                    x:Name="Legend"
+                                    Style="{TemplateBinding LegendStyle}"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Margin="0,20,20,0"
+                                    HorizontalAlignment="Center"/>
+                        <chartingprimitives:EdgePanel
+                                    x:Name="ChartArea"
+                                    Style="{TemplateBinding ChartAreaStyle}"
+                                    Grid.Column="0"
+                                    Grid.Row="1">
+                            <Grid
+                                        Canvas.ZIndex="-1"
+                                        Style="{TemplateBinding PlotAreaStyle}" />
+                            <!--<Border
+                                        Canvas.ZIndex="10"
+                                        BorderBrush="#FF919191"
+                                        BorderThickness="1" />-->
+                        </chartingprimitives:EdgePanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="#FF931104">
+            <TextBlock Text="Temperatura deshidratadora" FontWeight="Bold" FontSize="16" Foreground="White" HorizontalAlignment="Left" Margin="20,12,0,0"/>
+            <ProgressBar x:Name="LoadingBar" Visibility="Collapsed" IsEnabled="False" IsIndeterminate="true" Height="4" HorizontalAlignment="Stretch" Foreground="White"/>
+        </StackPanel>
+
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="20,25,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Deshidratadora:" VerticalAlignment="Top" />
+        <ComboBox x:Name="comboBox" DisplayMemberPath="idDeshidratadora" SelectedValuePath="idDeshidratadora" 
+                  HorizontalAlignment="Left" Margin="130,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="296" SelectionChanged="comboBox_SelectionChanged" />
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="20,74,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Grafica de temperatura" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="20,119,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Fecha:" VerticalAlignment="Top" />
+        <DatePicker x:Name="DatePickerToChart"  HorizontalAlignment="Left" Margin="130,117,0,0" Grid.Row="1" VerticalAlignment="Top" DateChanged="DatePickerToChart_DateChanged" Width="248"/>
+        <Button x:Name="BtnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="485,117,0,0" Grid.Row="1" VerticalAlignment="Top" Click="BtnActualizar_Click" Width="135" RenderTransformOrigin="0.837,0.531"/>
+        <charting:Chart x:Name="LineSeries"   Template="{StaticResource ColumnChartControlTemplate}" Visibility="Collapsed"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="380" Margin="20,170,0,0" Grid.Row="1" >
+            <charting:LineSeries Title="Temperatura" Margin="0"  IndependentValuePath="Hora" DependentValuePath="Temperatura_Desh" IsSelectionEnabled="True"/>
+        </charting:Chart>
+        <TextBlock x:Name="textBlock3" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Left" Margin="726,11,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Información de la deshidratadora" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockMarca"  Text="Marca" HorizontalAlignment="Left" Margin="845,48,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="726,48,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Marca:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="726,73,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Modelo:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="726,98,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Número de serie:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="726,123,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Total de alertas:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockNoSerie" HorizontalAlignment="Left" Text="Número de serie" Margin="845,98,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockModelo" Text="Modelo" HorizontalAlignment="Left" Margin="845,73,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockTotalAlertas" Text="Total de alertas" HorizontalAlignment="Left" Margin="845,123,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top"/>
+
+    </Grid>
+</Page>

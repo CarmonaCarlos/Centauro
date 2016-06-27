@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="Centauro.Tecnico"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Centauro"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Background="#FF015738">
+            <TextBlock Text="Tecnico" FontWeight="Bold" FontSize="16" Foreground="White" HorizontalAlignment="Left" Margin="20,12,0,0"/>
+            <ProgressBar x:Name="LoadingBar" Visibility="Collapsed" IsEnabled="False" IsIndeterminate="true" Height="4" HorizontalAlignment="Stretch" Foreground="White"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="20,0,-20,0">
+            <RadioButton x:Name="radioButtonBusqueda"  Content="Busqueda de técnico" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Checked="radioButtonBuscar_Checked"/>
+            <RadioButton x:Name="radioButtonRegistro" Content="Registrar nuevo técnico" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top" Checked="radioButtonRegistrar_Checked"/>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Categoria" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+            <TextBlock x:Name="textBlockTitleNewEdit" HorizontalAlignment="Left" Margin="226,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Registrar nuevo técnico" FontSize="24" FontWeight="Bold"/>
+            <TextBlock x:Name="textBlock3_Copy6" HorizontalAlignment="Left" Margin="226,157,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
+            <TextBlock x:Name="textBlock3_Copy7" HorizontalAlignment="Left" Margin="226,194,0,0" TextWrapping="Wrap" Text="Apellido Paterno:" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
+            <TextBlock x:Name="textBlock3_Copy8" HorizontalAlignment="Left" Margin="226,231,0,0" TextWrapping="Wrap" Text="Apellido Materno:" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
+            <TextBlock x:Name="textBlock3_Copy9" HorizontalAlignment="Left" Margin="226,268,0,0" TextWrapping="Wrap" Text="Fecha de nacimiento:" VerticalAlignment="Top"  Width="150" FontWeight="Bold"/>
+            <TextBlock x:Name="textBlock3_Copy10" HorizontalAlignment="Left" Margin="226,305,0,0" TextWrapping="Wrap" Text="Telefono:" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
+            <TextBlock x:Name="textBlock3_Copy11" HorizontalAlignment="Left" Margin="226,342,0,0" TextWrapping="Wrap" Text="Correo:" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
+            <TextBox x:Name="textBoxNombre" TabIndex="1"  PlaceholderText="Juan" HorizontalAlignment="Left" Margin="381,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="355"/>
+            <TextBox x:Name="textBoxAPatrno" TabIndex="2"  PlaceholderText="Perez" HorizontalAlignment="Left" Margin="381,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="355"/>
+            <TextBox x:Name="textBoxAMaterno" TabIndex="3"  PlaceholderText="Lujan" HorizontalAlignment="Left" Margin="381,219,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="355"/>
+            <TextBox x:Name="textBoxTelefono" TabIndex="5" PlaceholderText="Telefono" HorizontalAlignment="Left" Margin="381,293,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="355"/>
+            <TextBox x:Name="textBoxCorreo" TabIndex="6"  PlaceholderText="ejemplo@correo.com" HorizontalAlignment="Left" Margin="381,330,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="355"/>
+            <TextBox x:Name="textBoxDireccion" TabIndex="7"  PlaceholderText="Direccion" HorizontalAlignment="Left" Margin="381,367,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="355"/>
+            <TextBlock x:Name="textBlock3_Copy12" HorizontalAlignment="Left" Margin="226,379,0,0" TextWrapping="Wrap" Text="Direccion:" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
+            <DatePicker x:Name="dpFechaNac" TabIndex="4"  HorizontalAlignment="Left" Margin="381,256,0,0" VerticalAlignment="Top" Width="355"/>
+            <Button x:Name="buttonGuardar" TabIndex="9"  Content="Guardar" HorizontalAlignment="Left" Margin="605,441,0,0" VerticalAlignment="Top" Width="130" Click="buttonGuardar_Click"/>
+            <Button x:Name="buttonCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="470,441,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.138,-0.812" Width="130" Click="buttonCancelar_Click"/>
+            <Button x:Name="buttonEliminar" Content="Eliminar" Visibility="Collapsed" HorizontalAlignment="Left" Margin="662,71,0,0" VerticalAlignment="Top" Click="buttonEliminar_Click"/>
+            <RadioButton x:Name="radioButtonEditar" Content="Editar técnico" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Checked="radioButtonEditar_Checked"/>
+            <RadioButton x:Name="radioButtonEliminar" Content="Eliminar técnico" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Checked="radioButtonEliminar_Checked"/>
+            <TextBlock x:Name="textBlock3_Copy13" HorizontalAlignment="Left" Margin="226,416,0,0" TextWrapping="Wrap" Text="Contraseña:" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
+            <TextBlock x:Name="textBlockTecnico" HorizontalAlignment="Left"  Margin="226,83,0,0" TextWrapping="Wrap" Text="Tecnico:" VerticalAlignment="Top" Width="151" FontWeight="Bold"/>
+            <ComboBox x:Name="comboBoxIdTecnicoEditar"  HorizontalAlignment="Left" Margin="381,71,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="comboBoxIdTecnicoEditar_SelectionChanged"/>
+            <TextBlock x:Name="textBlock3_Copy" HorizontalAlignment="Left" Margin="226,120,0,0" TextWrapping="Wrap" Text="Nombre de usuario:" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
+            <TextBox x:Name="textBoxNombreUsuario" TabIndex="0" PlaceholderText="Nombre de usuario" HorizontalAlignment="Left" Margin="381,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="355"/>
+            <PasswordBox x:Name="passwordBox" TabIndex="8"  PlaceholderText="********************" HorizontalAlignment="Left" Margin="381,404,0,0" VerticalAlignment="Top" Width="354"/>
+
+        </Grid>
+
+
+    </Grid>
+
+
+</Page>

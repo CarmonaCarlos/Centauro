@@ -1,0 +1,95 @@
+﻿<Page
+    x:Class="Centauro.HistorialFallas"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Centauro"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <StackPanel Grid.Row="0" Background="#FF6E0256">
+            <TextBlock Text="Historial de fallas" FontWeight="Bold" FontSize="16" Foreground="White" HorizontalAlignment="Left" Margin="20,12,0,0"/>
+            <ProgressBar x:Name="LoadingBar" Visibility="Collapsed" IsEnabled="False" IsIndeterminate="true" Height="4" HorizontalAlignment="Stretch" Foreground="White"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Margin="10,10,-10,-10">
+            <ComboBox x:Name="comboBoxEstado" Margin="131,10,0,0" Width="210" SelectionChanged="comboBoxEstado_SelectionChanged">
+                <ComboBoxItem Content="Atendido"/>
+                <ComboBoxItem Content="No Atendido" />
+            </ComboBox>
+            <ComboBox x:Name="comboBoxDispositivo"  Margin="131,55,0,0" Width="210" SelectionChanged="comboBoxDispositivo_SelectionChanged">
+                <ComboBoxItem Content="Refrigerador"/>
+                <ComboBoxItem Content="Deshidratadora" />
+            </ComboBox>
+            <ComboBox x:Name="comboBoxIdDispositivo" SelectionChanged="comboBoxIdDispositivo_SelectionChanged" Margin="131,104,0,0" Width="210"/>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="16,15,0,0" TextWrapping="Wrap" Text="Estado:" VerticalAlignment="Top" Width="110"/>
+            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="16,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Text="Dispositivo:"/>
+            <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="16,105,0,0" TextWrapping="Wrap" Text="Deshidratadora:" VerticalAlignment="Top" Width="110"/>
+            <RadioButton x:Name="radioButtonTodo" IsEnabled="False" IsChecked="True" Content="Todo" Click="radioButton_Click" GroupName="radioSelect" Height="33" Margin="16,154,0,0" VerticalAlignment="Top" Width="33" Checked="radioButtonTodo_Checked"/>
+            <RadioButton x:Name="radioButtonFecha" IsEnabled="False" Content="Fecha" Click="radioButton1_Click" GroupName="radioSelect" Margin="16,204,0,0" VerticalAlignment="Top" Checked="radioButtonFecha_Checked"/>
+            <DatePicker x:Name="dpFecha" IsEnabled="False" Margin="16,252,0,0" VerticalAlignment="Top" Width="325" DateChanged="dpFecha_DateChanged"/>
+
+            <ListView x:Name="listView" Width="325"  Margin="-2,308,957,60" SelectionMode="Single" SelectionChanged="listView_SelectionChanged"  >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <ListBoxItem Content="{Binding idFalla}" Margin="-16,0,0,0" RightTapped="ListBoxItem_RightTapped" Width="150" />
+                            <!--<CheckBox x:Name="CheckBoxFalla" IsChecked="{Binding Atendido, Mode=TwoWay}"  Content="{Binding idFalla}" Margin="-10,5" VerticalAlignment="Center" Checked="CheckBoxFalla_Checked" Unchecked="CheckBoxFalla_Unchecked"/>-->
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Grid x:Name="GridDetalles" Margin="400,0,0,0" Width="695"  Height="530" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="21,0,0,0" TextWrapping="Wrap" Text="Detalles" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="21,55,0,0" TextWrapping="Wrap" Text="Id Falla:" VerticalAlignment="Top" Width="100"/>
+                <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="21,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Estado:" Width="100"/>
+                <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="21,105,0,0" TextWrapping="Wrap" Text="Temperatua:" VerticalAlignment="Top" Width="100"/>
+                <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="21,130,0,0" TextWrapping="Wrap" Text="Observaciones:" VerticalAlignment="Top" Width="100"/>
+                <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="21,155,0,0" TextWrapping="Wrap" Text="Id Tecnico:" VerticalAlignment="Top" Width="100"/>
+                <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="21,180,0,0" TextWrapping="Wrap" Text="Id Dispositivo:" VerticalAlignment="Top" Width="100"/>
+                <TextBlock x:Name="textBlockIdFalla" HorizontalAlignment="Left" Margin="140,55,0,0" TextWrapping="Wrap" Text="idFalla" VerticalAlignment="Top"/>
+                <TextBlock x:Name="textBlockEstado" HorizontalAlignment="Left" Margin="140,80,0,0" TextWrapping="Wrap" Text="Estado" VerticalAlignment="Top"/>
+                <TextBlock x:Name="textBlockTemperatura" HorizontalAlignment="Left" Margin="140,105,0,0" TextWrapping="Wrap" Text="Temperatura" VerticalAlignment="Top"/>
+                <TextBlock x:Name="textBlockObservaciones" HorizontalAlignment="Left" Margin="140,130,0,0" TextWrapping="Wrap" Text="Observaciones" VerticalAlignment="Top"/>
+                <TextBlock x:Name="textBlockIdTecnico" HorizontalAlignment="Left" Margin="140,155,0,0" TextWrapping="Wrap" Text="idTecnico" VerticalAlignment="Top"/>
+                <TextBlock x:Name="textBlockIdDispositivo" HorizontalAlignment="Left" Margin="140,180,0,0" TextWrapping="Wrap" Text="idDispositivo" VerticalAlignment="Top"/>
+                <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="21,283,0,0" TextWrapping="Wrap" Text="Atendido por:" VerticalAlignment="Top" Width="100"/>
+                <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="21,327,0,0" TextWrapping="Wrap" Text="Estado:" VerticalAlignment="Top" Width="100"/>
+                <ComboBox x:Name="comboBoxidTecnico"  HorizontalAlignment="Left" Margin="126,278,0,0" VerticalAlignment="Top" Width="180" SelectionChanged="comboBoxidTecnico_SelectionChanged"/>
+                <ComboBox x:Name="comboBoxCambiarEstado" HorizontalAlignment="Left" Margin="126,322,0,0" VerticalAlignment="Top" Width="180">
+                    <ComboBoxItem Content="Atendido"/>
+                    <ComboBoxItem Content="No Atendido" />
+                </ComboBox>
+                <CheckBox x:Name="checkBox" Content="Cambiar Estado" HorizontalAlignment="Left" Margin="21,222,0,0" VerticalAlignment="Top" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked"/>
+                <Button x:Name="buttonGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="231,468,0,0" VerticalAlignment="Top" Width="75" Click="buttonGuardar_Click"/>
+                <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="21,374,0,0" TextWrapping="Wrap" Text="Observaciones:" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBoxObservaciones" HorizontalAlignment="Left" Margin="126,374,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="180" Height="79"/>
+                <Button x:Name="buttonCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="151,468,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.422,2.906" Width="75" Click="buttonCancelar_Click"/>
+                <Grid x:Name="gridDetallesTecnico" Visibility="Visible">                    
+                    <TextBlock x:Name="textBlock13" HorizontalAlignment="Left" Margin="381,269,0,0" TextWrapping="Wrap" Text="Detalles del Técnico" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <TextBlock x:Name="textBlock14" HorizontalAlignment="Left" Margin="381,314,0,0" TextWrapping="Wrap" Text="Nombre:" VerticalAlignment="Top" Width="119"/>
+                    <TextBlock x:Name="textBlock14_Copy" HorizontalAlignment="Left" Margin="381,339,0,0" TextWrapping="Wrap" Text="Apellido Paterno:" VerticalAlignment="Top" Width="119"/>
+                    <TextBlock x:Name="textBlock14_Copy1" HorizontalAlignment="Left" Margin="381,364,0,0" TextWrapping="Wrap" Text="Apellido Materno:" VerticalAlignment="Top" Width="119"/>
+                    <TextBlock x:Name="textBlock14_Copy2" HorizontalAlignment="Left" Margin="381,389,0,0" TextWrapping="Wrap" Text="Telefono:" VerticalAlignment="Top" Width="119"/>
+                    <TextBlock x:Name="textBlock14_Copy3" HorizontalAlignment="Left" Margin="381,439,0,0" TextWrapping="Wrap" Text="Dirección:" VerticalAlignment="Top" Width="119"/>
+                    <TextBlock x:Name="textBlock14_Copy4" HorizontalAlignment="Left" Margin="381,414,0,0" TextWrapping="Wrap" Text="Correo:" VerticalAlignment="Top" Width="119"/>
+                    <TextBlock x:Name="textBlockNombre" HorizontalAlignment="Left" Margin="505,314,0,0" TextWrapping="Wrap" Text="Nombre" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textBlock15Apaterno" HorizontalAlignment="Left" Margin="505,339,0,0" TextWrapping="Wrap" Text="Apellido Paterno" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textBlock15Amaterno" HorizontalAlignment="Left" Margin="505,364,0,0" TextWrapping="Wrap" Text="Apellido Materno" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textBlock15Telefono" HorizontalAlignment="Left" Margin="505,389,0,0" TextWrapping="Wrap" Text="Telefono" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textBlock15Correo" HorizontalAlignment="Left" Margin="505,414,0,0" TextWrapping="Wrap" Text="Correo" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textBlock15Direccion" HorizontalAlignment="Left" Margin="505,439,0,0" TextWrapping="Wrap" Text="Dirección" VerticalAlignment="Top"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
